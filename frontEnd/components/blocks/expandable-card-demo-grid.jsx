@@ -187,87 +187,49 @@ export const CloseIcon = () => {
 
 const cards = [
   {
-    description: "fake video of Rashmika Mandanna surfaced online",
-    title: "viral ‘Rashmika Mandanna’ video",
+    title: "Viral ‘Rashmika Mandanna’ video",
     src: "https://images.indianexpress.com/2023/11/deepfake-1.jpg?w=640",
     ctaText: "Visit",
-    ctaLink: "https://ui.aceternity.com/templates",
+    ctaLink: "https://indianexpress.com/article/technology/tech-news-technology/viral-rashmika-mandanna-video-spotlights-deepfake-problem-9015826/",
     content: () => {
       return (
-        (<p>Lana Del Rey, an iconic American singer-songwriter, is celebrated for
-                    her melancholic and cinematic music style. Born Elizabeth Woolridge
-                    Grant in New York City, she has captivated audiences worldwide with
-                    her haunting voice and introspective lyrics. <br /> <br />Her songs
-                    often explore themes of tragic romance, glamour, and melancholia,
-                    drawing inspiration from both contemporary and vintage pop culture.
-                    With a career that has seen numerous critically acclaimed albums, Lana
-                    Del Rey has established herself as a unique and influential figure in
-                    the music industry, earning a dedicated fan base and numerous
-                    accolades.
-                  </p>)
+        (<p>A recent deepfake of actor Rashmika Mandanna is currently viral on sites like Instagram, where her face has been morphed to a video where a woman can be seen entering a lift wearing revealing clothes. On a closer look, there are moments where one can decipher that the video is not genuine, but for someone not looking closely, it may not be the case.</p>)
       );
     },
   },
   {
-    description: "Babbu Maan",
-    title: "Mitran Di Chhatri",
-    src: "https://assets.aceternity.com/demos/babbu-maan.jpeg",
+    title: "WPP’s CEO targeted by deepfakes",
+    src: "https://i.guim.co.uk/img/media/466ef75cf36418621554d8a72e3f0ca7356d898b/0_240_3500_2100/master/3500.jpg?width=1900&dpr=1&s=none",
     ctaText: "Visit",
-    ctaLink: "https://ui.aceternity.com/templates",
+    ctaLink: "https://www.theguardian.com/technology/article/2024/may/10/ceo-wpp-deepfake-scam",
     content: () => {
       return (
-        (<p>Babu Maan, a legendary Punjabi singer, is renowned for his soulful
-                    voice and profound lyrics that resonate deeply with his audience. Born
-                    in the village of Khant Maanpur in Punjab, India, he has become a
-                    cultural icon in the Punjabi music industry. <br /> <br />His songs
-                    often reflect the struggles and triumphs of everyday life, capturing
-                    the essence of Punjabi culture and traditions. With a career spanning
-                    over two decades, Babu Maan has released numerous hit albums and
-                    singles that have garnered him a massive fan following both in India
-                    and abroad.
+        (<p>The head of the world’s biggest advertising group was the target of an elaborate deepfake scam that involved an artificial intelligence voice clone. The CEO of WPP, Mark Read, detailed the attempted fraud in a recent email to leadership, warning others at the company to look out for calls claiming to be from top executives.
                   </p>)
       );
     },
   },
 
   {
-    description: "Metallica",
-    title: "For Whom The Bell Tolls",
-    src: "https://assets.aceternity.com/demos/metallica.jpeg",
+    title: "Virat Kohli deepfake slamming Gill ",
+    src: "https://bsmedia.business-standard.com/_media/bs/img/article/2024-08/29/full/1724926845-2938.png",
     ctaText: "Visit",
-    ctaLink: "https://ui.aceternity.com/templates",
+    ctaLink: "https://www.business-standard.com/cricket/news/viral-video-virat-kohli-s-deepfake-video-slamming-gill-goes-viral-on-x-124082900733_1.html",
     content: () => {
       return (
-        (<p>Metallica, an iconic American heavy metal band, is renowned for their
-                    powerful sound and intense performances that resonate deeply with
-                    their audience. Formed in Los Angeles, California, they have become a
-                    cultural icon in the heavy metal music industry. <br /> <br />Their
-                    songs often reflect themes of aggression, social issues, and personal
-                    struggles, capturing the essence of the heavy metal genre. With a
-                    career spanning over four decades, Metallica has released numerous hit
-                    albums and singles that have garnered them a massive fan following
-                    both in the United States and abroad.
+        (<p> A deepfake video recently went viral over social media where Virat Kohli could be seen slamming Indian opener Shubhman Gill. The viral video shows Virat talking about Shubhman Gill stating what he lacks and questioning his potential in cricket. 
                   </p>)
       );
     },
   },
   {
-    description: "Lord Himesh",
-    title: "Aap Ka Suroor",
-    src: "https://assets.aceternity.com/demos/aap-ka-suroor.jpeg",
+    title: "Deepfakes affecting Indian Elections",
+    src: "https://images.newscientist.com/wp-content/uploads/2024/04/23110912/SEI_200083853.jpg",
     ctaText: "Visit",
-    ctaLink: "https://ui.aceternity.com/templates",
+    ctaLink: "https://www.newscientist.com/article/2427842-deepfake-politicians-may-have-a-big-influence-on-indias-elections/",
     content: () => {
       return (
-        (<p>Himesh Reshammiya, a renowned Indian music composer, singer, and
-                    actor, is celebrated for his distinctive voice and innovative
-                    compositions. Born in Mumbai, India, he has become a prominent figure
-                    in the Bollywood music industry. <br /> <br />His songs often feature
-                    a blend of contemporary and traditional Indian music, capturing the
-                    essence of modern Bollywood soundtracks. With a career spanning over
-                    two decades, Himesh Reshammiya has released numerous hit albums and
-                    singles that have garnered him a massive fan following both in India
-                    and abroad.
+        (<p>Artificial intelligence is enabling India’s politicians to be everywhere at once in the world’s largest election by cloning their voices and digital likenesses. Even dead public figures, such as politician and actress Jayaram Jayalalithaa, are getting digitally resurrected to canvass support in what is shaping up to be the biggest test yet of democratic elections in the age of AI-generated deepfakes.
                   </p>)
       );
     },

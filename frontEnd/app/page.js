@@ -16,7 +16,7 @@ export default function Home() {
       <div className="flex justify-center items-center bg-gray-950">
         <CompareImg />
       </div>
-      <div className="text-white text-4xl font-bold font-mono items-center text-center mt-20">Why is Deepfake an pressing Issue ?</div>
+      <div className="text-white text-4xl font-bold font-mono items-center text-center mt-20">Why is Deepfake a pressing Issue ?</div>
       <div className="items-center bg-gray-95 pt-10">
         {/* <Issue /> */}
         <ExpandableCardDemo />
