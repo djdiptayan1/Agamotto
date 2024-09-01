@@ -2,11 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
-
-
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
     ssr: false,
@@ -400,6 +395,7 @@ export default function GlobeStats() {
         },
     ];
 
+<<<<<<< HEAD
     const chartData = {
         labels: ["India", "US", "South Africa", "Mexico Countries", "Moldova", "Indonesia", "South Korea"],
         datasets: [
@@ -412,11 +408,16 @@ export default function GlobeStats() {
             },
         ],
     };
+=======
+    const c_data = [280, 303, 500, 500, 900, 1550, 1625];
+    const rad_Data = c_data.map(function(item) { return item/100 } )
+>>>>>>> 845f0aa (glove)
 
     const c_data = [280, 303, 500, 500, 900, 1550, 1625];
     const rad_Data = c_data.map(function (item) { return item / 100 })
 
     const markers = [
+<<<<<<< HEAD
         { lat: 20.5937, lng: 78.9629, color: 'red', rad: rad_Data[0], countryName: 'India' }, // India
         { lat: 37.0902, lng: -95.7129, color: 'red', rad: rad_Data[1], countryName: 'United States' }, // United States
         { lat: -30.5595, lng: 22.9375, color: 'red', rad: rad_Data[2], countryName: 'South Africa' }, // South Africa
@@ -462,6 +463,16 @@ export default function GlobeStats() {
             },
         },
     };
+=======
+        { lat: 20.5937, lng: 78.9629, color: 'red', rad: rad_Data[0], countryName: 'India'}, // India
+        { lat: 37.0902, lng: -95.7129, color: 'red', rad: rad_Data[1], countryName: 'United States'}, // United States
+        { lat: -30.5595, lng: 22.9375, color: 'red', rad:  rad_Data[2], countryName: 'South Africa'}, // South Africa
+        { lat: 23.6345, lng: -102.5528, color: 'red', rad: rad_Data[3], countryName: 'Mexico'}, // Mexico
+        { lat: 47.4116, lng: 28.3699, color: 'red', rad: rad_Data[4], countryName: 'Moldova'}, // Moldova
+        { lat: -0.7893, lng: 113.9213, color: 'red', rad: rad_Data[5], countryName: 'Indonesia'}, // Indonesia
+        { lat: 35.9078, lng: 127.7669, color: 'red', rad: rad_Data[6], countryName: 'South Korea'}, // South Korea
+      ];
+>>>>>>> 845f0aa (glove)
 
 
     return (
@@ -476,9 +487,16 @@ export default function GlobeStats() {
                     transition={{ duration: 1 }}
                     className="flex-1 flex justify-center items-center"
                 >
+<<<<<<< HEAD
                     <div className="max-w-lg md:max-w-xl w-full">
                         <Bar data={chartData} options={chartOptions} />
                     </div>
+=======
+                    <h2 className="text-xl md:text-4xl font-extrabold font-mono text-white">
+                        Global Deepfake Crime Statistics
+                    </h2>
+                    
+>>>>>>> 845f0aa (glove)
                 </motion.div>
 
                 {/* Globe Section */}

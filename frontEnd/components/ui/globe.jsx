@@ -1,6 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+<<<<<<< HEAD
 import { Color, Scene, Fog, PerspectiveCamera, Vector3, Mesh, MeshBasicMaterial, CircleGeometry, DoubleSide, CanvasTexture, SpriteMaterial, Sprite } from "three";
+=======
+import { Color, Scene, Fog, PerspectiveCamera, Vector3, Mesh, MeshBasicMaterial, CircleGeometry, DoubleSide, CanvasTexture, SpriteMaterial, Sprite} from "three";
+>>>>>>> 845f0aa (glove)
 import ThreeGlobe from "three-globe";
 import { useThree, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -14,7 +18,7 @@ const cameraZ = 300;
 
 let numbersOfRings = [0];
 
-export function Globe({ globeConfig, data, markers }) {
+export function Globe({ globeConfig, data, markers}) {
   const [globeData, setGlobeData] = useState(null);
   const globeRef = useRef(null);
 
@@ -50,7 +54,11 @@ export function Globe({ globeConfig, data, markers }) {
     globeMaterial.emissive = new Color(globeConfig.emissive);
     globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
     globeMaterial.shininess = globeConfig.shininess || 0.9;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 845f0aa (glove)
   };
 
   const _buildData = () => {
@@ -130,15 +138,19 @@ export function Globe({ globeConfig, data, markers }) {
       .ringRepeatPeriod((defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings);
   };
 
+<<<<<<< HEAD
 
   //MARKERS RENDER
   const renderMarkers = () => {
     if (!markers || !globeRef.current) return;
+=======
+>>>>>>> 845f0aa (glove)
 
-    markers.forEach((marker) => {
-      const { lat, lng, color } = marker;
-      const { x, y, z } = latLngToVector3(lat, lng);
+//MARKERS RENDER
+const renderMarkers = () => {
+  if (!markers || !globeRef.current) return;
 
+<<<<<<< HEAD
       const markerGeometry = new CircleGeometry(marker.rad, 32); // Create a flat circular geometry
       const markerMaterial = new MeshBasicMaterial({ color, side: DoubleSide, transparent: true, opacity: 0.2 }); // Ensure the circle is visible from both sides
       const markerMesh = new Mesh(markerGeometry, markerMaterial);
@@ -174,6 +186,47 @@ export function Globe({ globeConfig, data, markers }) {
       globeRef.current.add(textLabel);
     });
   };
+=======
+  markers.forEach((marker) => {
+    const { lat, lng, color } = marker;
+    const { x, y, z } = latLngToVector3(lat, lng);
+
+    const markerGeometry = new CircleGeometry(marker.rad, 32); // Create a flat circular geometry
+    const markerMaterial = new MeshBasicMaterial({ color, side: DoubleSide, transparent: true, opacity: 0.2}); // Ensure the circle is visible from both sides
+    const markerMesh = new Mesh(markerGeometry, markerMaterial);
+
+    markerMesh.position.set(x, y, z);
+
+    const normal = new Vector3(x, y, z).normalize(); // Calculate the normal vector pointing outward from the globe
+    markerMesh.quaternion.setFromUnitVectors(new Vector3(0, 0, 1), normal); // Rotate the marker to align with the surface normal
+
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    const fontSize = 130;
+    canvas.width = 800;
+    canvas.height = 256;
+
+    // Draw the text onto the canvas
+    context.font = `${fontSize}px Arial`;
+    context.fillStyle = "#ffffff"; // Text color
+    context.textAlign = "center";
+    context.fillText(marker.countryName, canvas.width / 2, canvas.height / 2);
+
+    // Create texture from canvas
+    const texture = new CanvasTexture(canvas);
+    const spriteMaterial = new SpriteMaterial({ map: texture, transparent: true, depthTest: false});
+    const textLabel = new Sprite(spriteMaterial);
+
+    // Position the text label above the marker
+    textLabel.scale.set(30, 10, 1); // Adjust size if needed
+    textLabel.position.set(x, y + 10, z); // Slightly above the marker
+
+
+    globeRef.current.add(markerMesh);
+    globeRef.current.add(textLabel);
+  });
+};
+>>>>>>> 845f0aa (glove)
 
   useEffect(() => {
     if (!globeRef.current || !globeData) return;
