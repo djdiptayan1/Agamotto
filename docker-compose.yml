@@ -1,0 +1,24 @@
+version: '3.8'  # Version of Docker Compose
+
+services:
+  backend:
+    image: djdiptayan/agamotto-backend  # Replace with your backend image
+    build:
+      context: ./backend  # Path to your backend Dockerfile and code
+      dockerfile: Dockerfile  # Specify Dockerfile if it's named differently
+    ports:
+      - "3001:3001"  # Map port 3001 of the container to port 3001 on the host
+    environment:
+      - PORT=3001  # Environment variable for backend if needed
+    container_name: agamotto-backend  # Set the container name for the backend service
+
+  frontend:
+    image: djdiptayan/agamotto-frontend  # Replace with your frontend image
+    build:
+      context: ./frontEnd  # Path to your frontend Dockerfile and code
+      dockerfile: Dockerfile  # Specify Dockerfile if it's named differently
+    ports:
+      - "3000:3000"  # Map port 3000 of the container to port 3000 on the host
+    environment:
+      - PORT=3000  # Environment variable for frontend if needed
+    container_name: agamotto-frontend  # Set the container name for the frontend service
