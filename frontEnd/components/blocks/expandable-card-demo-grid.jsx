@@ -139,7 +139,7 @@ export default function ExpandableCardDemo() {
             <div className="flex justify-center items-center flex-col">
               <motion.h3
                 layoutId={`title-${card.title}-${id}`}
-                className="font-medium text-neutral-800 dark:text-neutral-200 text-center md:text-left text-base">
+                className="font-medium text-gray-300 dark:text-neutral-200 text-center md:text-left text-base">
                 {card.title}
               </motion.h3>
               <motion.p
