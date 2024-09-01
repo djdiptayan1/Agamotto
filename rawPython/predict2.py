@@ -84,7 +84,7 @@ def extract_faces_and_classify(video_path, num_frames=10):
     return predicted_class
 
 # Example usage: Classify a single video
-video_path = '/Users/srijit/Documents/Projects/SIH/DeepFakeDetection/c23/videos/01_02__outside_talking_still_laughing__YVGY8LOK.mp4'  # Replace with your video path
+video_path = 'sample.mp4'  # Replace with your video path
 predicted_class = extract_faces_and_classify(video_path)
 predicted_class_name = class_names[predicted_class]
 

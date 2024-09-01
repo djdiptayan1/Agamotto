@@ -1,6 +1,6 @@
-"use client";;
+"use client";
 import { useEffect, useRef, useState } from "react";
-import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
+import { Color, Scene, Fog, PerspectiveCamera, Vector3, Mesh, MeshBasicMaterial, CircleGeometry, DoubleSide, CanvasTexture, SpriteMaterial, Sprite } from "three";
 import ThreeGlobe from "three-globe";
 import { useThree, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -14,12 +14,8 @@ const cameraZ = 300;
 
 let numbersOfRings = [0];
 
-export function Globe({
-  globeConfig,
-  data
-}) {
+export function Globe({ globeConfig, data, markers }) {
   const [globeData, setGlobeData] = useState(null);
-
   const globeRef = useRef(null);
 
   const defaultProps = {
@@ -78,11 +74,11 @@ export function Globe({
       });
     }
 
-    // remove duplicates for same lat and lng
+    // Remove duplicates for same lat and lng
     const filteredPoints = points.filter((v, i, a) =>
       a.findIndex((v2) =>
-        ["lat", "lng"].every((k) => v2[k] === v[k])) === i);
-
+        ["lat", "lng"].every((k) => v2[k] === v[k])) === i
+    );
     setGlobeData(filteredPoints);
   };
 
@@ -95,10 +91,9 @@ export function Globe({
         .showAtmosphere(defaultProps.showAtmosphere)
         .atmosphereColor(defaultProps.atmosphereColor)
         .atmosphereAltitude(defaultProps.atmosphereAltitude)
-        .hexPolygonColor((e) => {
-          return defaultProps.polygonColor;
-        });
+        .hexPolygonColor(() => defaultProps.polygonColor);
       startAnimation();
+      renderMarkers(); // Call marker rendering function
     }
   }, [globeData]);
 
@@ -107,25 +102,21 @@ export function Globe({
 
     globeRef.current
       .arcsData(data)
-      .arcStartLat((d) => (d).startLat * 1)
-      .arcStartLng((d) => (d).startLng * 1)
-      .arcEndLat((d) => (d).endLat * 1)
-      .arcEndLng((d) => (d).endLng * 1)
-      .arcColor((e) => (e).color)
-      .arcAltitude((e) => {
-        return (e).arcAlt * 1;
-      })
-      .arcStroke((e) => {
-        return [0.32, 0.28, 0.3][Math.round(Math.random() * 2)];
-      })
+      .arcStartLat((d) => d.startLat * 1)
+      .arcStartLng((d) => d.startLng * 1)
+      .arcEndLat((d) => d.endLat * 1)
+      .arcEndLng((d) => d.endLng * 1)
+      .arcColor((e) => e.color)
+      .arcAltitude((e) => e.arcAlt * 1)
+      .arcStroke((e) => [0.32, 0.28, 0.3][Math.round(Math.random() * 2)])
       .arcDashLength(defaultProps.arcLength)
-      .arcDashInitialGap((e) => (e).order * 1)
+      .arcDashInitialGap((e) => e.order * 1)
       .arcDashGap(15)
       .arcDashAnimateTime((e) => defaultProps.arcTime);
 
     globeRef.current
       .pointsData(data)
-      .pointColor((e) => (e).color)
+      .pointColor((e) => e.color)
       .pointsMerge(true)
       .pointAltitude(0.0)
       .pointRadius(2);
@@ -137,6 +128,51 @@ export function Globe({
       .ringPropagationSpeed(RING_PROPAGATION_SPEED)
       .ringRepeatPeriod((defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings);
   };
+
+
+    //MARKERS RENDER
+    const renderMarkers = () => {
+      if (!markers || !globeRef.current) return;
+
+  markers.forEach((marker) => {
+    const { lat, lng, color } = marker;
+    const { x, y, z } = latLngToVector3(lat, lng);
+
+    const markerGeometry = new CircleGeometry(marker.rad, 32); // Create a flat circular geometry
+    const markerMaterial = new MeshBasicMaterial({ color, side: DoubleSide, transparent: true, opacity: 0.2}); // Ensure the circle is visible from both sides
+    const markerMesh = new Mesh(markerGeometry, markerMaterial);
+
+    markerMesh.position.set(x, y, z);
+
+    const normal = new Vector3(x, y, z).normalize(); // Calculate the normal vector pointing outward from the globe
+    markerMesh.quaternion.setFromUnitVectors(new Vector3(0, 0, 1), normal); // Rotate the marker to align with the surface normal
+
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    const fontSize = 130;
+    canvas.width = 800;
+    canvas.height = 256;
+
+    // Draw the text onto the canvas
+    context.font = `${fontSize}px Arial`;
+    context.fillStyle = "#ffffff"; // Text color
+    context.textAlign = "center";
+    context.fillText(marker.countryName, canvas.width / 2, canvas.height / 2);
+
+    // Create texture from canvas
+    const texture = new CanvasTexture(canvas);
+    const spriteMaterial = new SpriteMaterial({ map: texture, transparent: true, depthTest: false});
+    const textLabel = new Sprite(spriteMaterial);
+
+    // Position the text label above the marker
+    textLabel.scale.set(30, 10, 1); // Adjust size if needed
+    textLabel.position.set(x, y + 10, z); // Slightly above the marker
+
+
+    globeRef.current.add(markerMesh);
+    globeRef.current.add(textLabel);
+  });
+};
 
   useEffect(() => {
     if (!globeRef.current || !globeData) return;
@@ -153,9 +189,11 @@ export function Globe({
     };
   }, [globeRef.current, globeData]);
 
-  return (<>
-    <threeGlobe ref={globeRef} />
-  </>);
+  return (
+    <>
+      <threeGlobe ref={globeRef} />
+    </>
+  );
 }
 
 export function WebGLRendererConfig() {
@@ -165,7 +203,7 @@ export function WebGLRendererConfig() {
     gl.setPixelRatio(window.devicePixelRatio);
     gl.setSize(size.width, size.height);
     gl.setClearColor(0xffaaff, 0);
-  }, []);
+  }, [gl, size]);
 
   return null;
 }
@@ -175,19 +213,22 @@ export function World(props) {
   const scene = new Scene();
   scene.fog = new Fog(0xffffff, 400, 2000);
   return (
-    (<Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
+    <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
       <WebGLRendererConfig />
       <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
       <directionalLight
         color={globeConfig.directionalLeftLight}
-        position={new Vector3(-400, 100, 400)} />
+        position={new Vector3(-400, 100, 400)}
+      />
       <directionalLight
         color={globeConfig.directionalTopLight}
-        position={new Vector3(-200, 500, 200)} />
+        position={new Vector3(-200, 500, 200)}
+      />
       <pointLight
         color={globeConfig.pointLight}
         position={new Vector3(-200, 500, 200)}
-        intensity={0.8} />
+        intensity={0.8}
+      />
       <Globe {...props} />
       <OrbitControls
         enablePan={false}
@@ -197,16 +238,18 @@ export function World(props) {
         autoRotateSpeed={1}
         autoRotate={true}
         minPolarAngle={Math.PI / 3.5}
-        maxPolarAngle={Math.PI - Math.PI / 3} />
-    </Canvas>)
+        maxPolarAngle={Math.PI - Math.PI / 3}
+      />
+    </Canvas>
   );
 }
 
 export function hexToRgb(hex) {
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
+  hex = hex.replace(
+    shorthandRegex,
+    (m, r, g, b) => r + r + g + g + b + b
+  );
 
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
@@ -219,11 +262,21 @@ export function hexToRgb(hex) {
 }
 
 export function genRandomNumbers(min, max, count) {
-  const arr = [];
-  while (arr.length < count) {
-    const r = Math.floor(Math.random() * (max - min)) + min;
-    if (arr.indexOf(r) === -1) arr.push(r);
+  const randomNumbers = new Set();
+  while (randomNumbers.size < count) {
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    randomNumbers.add(randomNumber);
   }
+  return Array.from(randomNumbers);
+}
 
-  return arr;
+function latLngToVector3(lat, lng, radius = 100) {
+  const phi = (88 - lat) * (Math.PI / 180);
+  const theta = (lng + 88) * (Math.PI / 180);
+
+  const x = -(radius * Math.sin(phi) * Math.cos(theta));
+  const z = radius * Math.sin(phi) * Math.sin(theta);
+  const y = radius * Math.cos(phi);
+
+  return { x, y, z };
 }

@@ -1,0 +1,8 @@
+facenet-pytorch
+flask
+gunicorn
+flask-cors
+opencv-python
+numpy
+pandas
+tensorflow
