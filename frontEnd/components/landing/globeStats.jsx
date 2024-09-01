@@ -36,7 +36,7 @@ export default function GlobeStats() {
         autoRotateSpeed: 0.5,
     };
     const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
-    
+
     const sampleArcs = [
         {
             order: 1,
@@ -406,17 +406,24 @@ export default function GlobeStats() {
             {
                 label: "Deepfake Incidents",
                 data: [280, 303, 500, 500, 900, 1550, 1625],
-                backgroundColor:  colors,
+                backgroundColor: colors,
                 borderColor: "#1d4ed8",
                 borderWidth: 1,
             },
         ],
     };
 
+    const c_data = [280, 303, 500, 500, 900, 1550, 1625];
+    const rad_Data = c_data.map(function (item) { return item / 100 })
+
     const markers = [
-        { lat: 37.7749, lng: -122.4194, color: 'red' }, // San Francisco
-        { lat: 40.7128, lng: -74.0060, color: 'red' },   // New York
-        { lat: 51.5074, lng: -0.1278, color: 'red' },    // London
+        { lat: 20.5937, lng: 78.9629, color: 'red', rad: rad_Data[0], countryName: 'India' }, // India
+        { lat: 37.0902, lng: -95.7129, color: 'red', rad: rad_Data[1], countryName: 'United States' }, // United States
+        { lat: -30.5595, lng: 22.9375, color: 'red', rad: rad_Data[2], countryName: 'South Africa' }, // South Africa
+        { lat: 23.6345, lng: -102.5528, color: 'red', rad: rad_Data[3], countryName: 'Mexico' }, // Mexico
+        { lat: 47.4116, lng: 28.3699, color: 'red', rad: rad_Data[4], countryName: 'Moldova' }, // Moldova
+        { lat: -0.7893, lng: 113.9213, color: 'red', rad: rad_Data[5], countryName: 'Indonesia' }, // Indonesia
+        { lat: 35.9078, lng: 127.7669, color: 'red', rad: rad_Data[6], countryName: 'South Korea' }, // South Korea
     ];
 
     const chartOptions = {
@@ -459,21 +466,23 @@ export default function GlobeStats() {
 
     return (
         <div className="flex flex-col items-center justify-center py-20 h-screen md:h-auto relative w-full">
-            <div className="max-w-7xl mx-auto w-full relative px-4">
+            <h2 className="text-xl md:text-4xl font-extrabold font-mono text-white mb-8">
+                Global Deepfake Crime Statistics
+            </h2>
+            <div className="max-w-7xl mx-auto w-full px-4 flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
-                    className="text-center mb-8"
+                    className="flex-1 flex justify-center items-center"
                 >
-                    <h2 className="text-xl md:text-4xl font-extrabold font-mono text-white">
-                        Global Deepfake Crime Statistics
-                    </h2>
-                    <div className="mt-4 max-w-md mx-auto">
+                    <div className="max-w-lg md:max-w-xl w-full">
                         <Bar data={chartData} options={chartOptions} />
                     </div>
                 </motion.div>
-                <div className="relative h-[40rem] w-full">
+
+                {/* Globe Section */}
+                <div className="flex-1 flex justify-center items-center relative h-[40rem] w-full">
                     <World data={sampleArcs} globeConfig={globeConfig} markers={markers} />
                 </div>
             </div>
