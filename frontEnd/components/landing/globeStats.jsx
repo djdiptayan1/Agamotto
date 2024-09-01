@@ -2,6 +2,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
+
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
     ssr: false,
@@ -31,6 +36,7 @@ export default function GlobeStats() {
         autoRotateSpeed: 0.5,
     };
     const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
+    
     const sampleArcs = [
         {
             order: 1,
@@ -394,40 +400,83 @@ export default function GlobeStats() {
         },
     ];
 
+    const chartData = {
+        labels: ["India", "US", "South Africa", "Mexico Countries", "Moldova", "Indonesia", "South Korea"],
+        datasets: [
+            {
+                label: "Deepfake Incidents",
+                data: [280, 303, 500, 500, 900, 1550, 1625],
+                backgroundColor:  colors,
+                borderColor: "#1d4ed8",
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    const markers = [
+        { lat: 37.7749, lng: -122.4194, color: 'red' }, // San Francisco
+        { lat: 40.7128, lng: -74.0060, color: 'red' },   // New York
+        { lat: 51.5074, lng: -0.1278, color: 'red' },    // London
+    ];
+
+    const chartOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        let label = context.dataset.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed.y !== null) {
+                            label += `${context.parsed.y}`;
+                        }
+                        return label;
+                    },
+                },
+            },
+        },
+        scales: {
+            x: {
+                beginAtZero: true,
+                grid: {
+                    display: false,
+                },
+            },
+            y: {
+                beginAtZero: true,
+                grid: {
+                    borderDash: [2, 2],
+                },
+            },
+        },
+    };
+
+
     return (
-        (<div
-            className="flex flex-row items-center justify-center py-20 h-screen md:h-auto relative w-full">
-            <div
-                className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
+        <div className="flex flex-col items-center justify-center py-20 h-screen md:h-auto relative w-full">
+            <div className="max-w-7xl mx-auto w-full relative px-4">
                 <motion.div
-                    initial={{
-                        opacity: 0,
-                        y: 20,
-                    }}
-                    animate={{
-                        opacity: 1,
-                        y: 0,
-                    }}
-                    transition={{
-                        duration: 1,
-                    }}
-                    className="div">
-                    <h2
-                        className="text-center text-xl md:text-4xl font-extrabold font-mono text-white">
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                    className="text-center mb-8"
+                >
+                    <h2 className="text-xl md:text-4xl font-extrabold font-mono text-white">
                         Global Deepfake Crime Statistics
                     </h2>
-                    <p
-                        className="text-center text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-md mt-2 mx-auto">
-                        This globe is interactive and customizable. Have fun with it, and
-                        don&apos;t forget to share it. :)
-                    </p>
+                    <div className="mt-4 max-w-md mx-auto">
+                        <Bar data={chartData} options={chartOptions} />
+                    </div>
                 </motion.div>
-                <div
-                    className="absolute w-full bottom-0 inset-x-0 h-40 pointer-events-none select-none " />
-                <div className="absolute w-full lg:-bottom-10 h-96 md:h-full z-10">
-                    <World data={sampleArcs} globeConfig={globeConfig} />
+                <div className="relative h-[40rem] w-full">
+                    <World data={sampleArcs} globeConfig={globeConfig} markers={markers} />
                 </div>
             </div>
-        </div>)
+        </div>
     );
 }
