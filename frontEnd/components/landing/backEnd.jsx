@@ -11,8 +11,8 @@ export default function BackEnd() {
     return (
         (<div className="w-full h-full py-20">
             <h2
-                className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
-                Get to know your iSad.
+                className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-extrabold text-neutral-800 dark:text-neutral-200 font-mono">
+                Our Solution
             </h2>
             <Carousel items={cards} />
         </div>)
@@ -50,39 +50,40 @@ const DummyContent = () => {
 
 const data = [
     {
-        category: "Artificial Intelligence",
-        title: "You can do more with AI.",
-        src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        category: "MTCNN Architecture",
+        title: "Agamotto integrates advanced Machine Learning techniques, combining Convolutional Neural Networks (CNNs) for local feature extraction and  for capturing global relationships, delivering robust deepfake detection.",
+        src: "https://about.fb.com/wp-content/uploads/2022/09/PyTorch-Foundation-Launch_Header.jpg?fit=1920%2C1080",
         content: <DummyContent />,
     },
     {
-        category: "Productivity",
-        title: "Enhance your productivity.",
-        src: "https://images.unsplash.com/photo-1531554694128-c4c6665f59c2?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        category: "Advanced Preprocessing",
+        title: "Agamotto utilizes state-of-the-art deep learning libraries like MTCNN for precise face extraction, ensuring high-quality input for detection. It employs data augmentation techniques to increase dataset diversity, significantly improving the model’s ability to generalize across various scenarios",
+
+        src: "https://d3caycb064h6u1.cloudfront.net/wp-content/uploads/2022/09/datacleaning-scaled.jpg",
         content: <DummyContent />,
     },
     {
-        category: "Product",
-        title: "Launching the new Apple Vision Pro.",
-        src: "https://images.unsplash.com/photo-1713869791518-a770879e60dc?q=80&w=2333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        category: "Effective Detection and Generalization",
+        title: "Optimized for detecting deepfakes across varied environments with a robust preprocessing pipeline and adaptable design for integrating new data and technologies.",
+        src: "https://media.licdn.com/dms/image/v2/C5612AQGu4927u51Xbg/article-inline_image-shrink_400_744/article-inline_image-shrink_400_744/0/1571280655696?e=1730332800&v=beta&t=6AI1Xo8W0tgE9-KQqoXpCfYYh9kIgl8KlS5CZ6BnJTE",
         content: <DummyContent />,
     },
 
     {
-        category: "Product",
-        title: "Maps for your iPhone 15 Pro Max.",
-        src: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        category: "Lightweight, Robust Model",
+        title: "We propose a lightweight model with 6.7 million parameters and a size of only 26 MB, suitable for classifying six different classes. Real videos and five different classes of deepfakes (FaceSwap, NeuralTextures, Face2Face, DeepfakeDetection, FaceShifter) are effectively identified.",
+        src: "https://miro.medium.com/v2/resize:fit:1100/1*w4wR9mLS46s3gsX_7pW_ww.jpeg",
         content: <DummyContent />,
     },
     {
-        category: "iOS",
-        title: "Photography just got better.",
-        src: "https://images.unsplash.com/photo-1602081957921-9137a5d6eaee?q=80&w=2793&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        category: "Comprehensive Evaluation",
+        title: "Agamotto is evaluated with accuracy, AUC, and log loss metrics, ensuring the solution’s reliability and effectiveness across various use cases. The solution is designed with a modern UI for an intuitive, easy to use interface, facilitating effortless integration and deployment.",
+        src: "https://media.istockphoto.com/id/1410963366/photo/user-give-rating-5-star-to-service-experience-on-online-application.jpg?s=612x612&w=0&k=20&c=S8bN6oPkBuWb02pmZOr-OxEJwLaxPCPy8F8oILgbNv8=",
         content: <DummyContent />,
     },
     {
-        category: "Hiring",
-        title: "Hiring for a Staff Software Engineer",
+        category: "Scalable and Future-Ready Design",
+        title: "With support for containerization technologies like Docker, Agamotto facilitates flexible scaling and straightforward deployment across multiple platforms, including AWS and Azure.",
         src: "https://images.unsplash.com/photo-1511984804822-e16ba72f5848?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         content: <DummyContent />,
     },
