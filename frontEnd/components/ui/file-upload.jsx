@@ -41,6 +41,9 @@ export const FileUpload = ({ onChange }) => {
   const { getRootProps, isDragActive } = useDropzone({
     multiple: false,
     noClick: true,
+    accept: {
+      'video/mp4': ['.mp4'],
+    },
     onDrop: handleFileChange,
     onDropRejected: (error) => {
       console.log(error);
@@ -57,6 +60,7 @@ export const FileUpload = ({ onChange }) => {
           ref={fileInputRef}
           id="file-upload-handle"
           type="file"
+          accept=".mp4" // Restrict to .mp4 files
           onChange={(e) => handleFileChange(Array.from(e.target.files || []))}
           className="hidden" />
         <div
