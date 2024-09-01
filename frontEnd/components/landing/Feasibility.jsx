@@ -6,7 +6,7 @@ import { WobbleCard } from "../ui/wobble-card";
 export default function Feasibility() {
     return (
         (<div
-            className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full mb-10">
+            className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full pb-16">
             <WobbleCard
                 containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
                 className="">
