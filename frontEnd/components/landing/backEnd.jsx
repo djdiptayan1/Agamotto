@@ -84,7 +84,7 @@ const data = [
     {
         category: "Scalable and Future-Ready Design",
         title: "With support for containerization technologies like Docker, Agamotto facilitates flexible scaling and straightforward deployment across multiple platforms, including AWS and Azure.",
-        src: "https://images.unsplash.com/photo-1511984804822-e16ba72f5848?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        src: "https://img.freepik.com/free-photo/hand-placing-wooden-block-represent-growth_23-2148780590.jpg",
         content: <DummyContent />,
     },
 ];
