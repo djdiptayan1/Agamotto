@@ -29,7 +29,6 @@ AGAMOTTO/
 ├── backend/
 │   ├── output/
 │   ├── uploads/
-│   ├── Agamotto_AWS_KeyPair.pem
 │   ├── DF_2.keras
 │   ├── dockerfile                    # Backend Dockerfile
 │   ├── main2.py
